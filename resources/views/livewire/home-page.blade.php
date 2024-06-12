@@ -147,7 +147,7 @@
       
           @foreach($brands as $brand)
           <div wire:key="{{$brand->id}}" class="bg-white rounded-lg shadow-md dark:bg-gray-800">
-            <a href="#" class="">
+            <a href="/products?selected_brands[0]={{$brand->id}}" class="">
               <div class=" flex-1 flex-col flex">
                 <img src="{{ url('storage', $brand->image) }}" alt="{{$brand->name}}" class="object-cover w-full h-full rounded-t-lg">
               </div>
@@ -192,7 +192,7 @@
 
           @foreach($products as $product)
           <div wire:key="{{$product->id}}" class="bg-white rounded-lg shadow-md dark:bg-gray-800">
-            <a href="#" class="">
+            <a href="/products?selected_brands[0]={{$brand->id}}" class="h-[2.375rem] w-[2.375rem] rounded-full">
               <div class=" flex-1 flex-col flex">
                 <img src="{{ url('storage', $product->image) }}" alt="{{$product->name}}" class="object-cover w-full h-full rounded-t-lg">
               </div>
@@ -238,7 +238,8 @@
         <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
     
           @foreach($categories as $category)
-          <a wire:key="{{ $category->id }}" class="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-slate-900 dark:border-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="">
+          <a wire:key="{{ $category->id }}" class="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-slate-900 dark:border-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" 
+            href="/products?selected_categories[0]={{$category->id}}">
             <div class="p-4 md:p-5">
               <div class="flex justify-between items-center">
                 <div class="flex items-center">

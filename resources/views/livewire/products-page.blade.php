@@ -53,11 +53,14 @@
                   </div>
 
                   <div class="p-4 mb-5 bg-white border border-gray-200 dark:bg-gray-900 dark:border-gray-900">
-                      <h2 class="text-2xl font-bold dark:text-gray-400">Price</h2>
+                      <h2 class="text-2xl font-bold dark:text-gray-400">Price Range</h2>
                       <div class="w-16 pb-2 mb-6 border-b border-rose-600 dark:border-gray-400"></div>
                       <div>
+                        <div class="font-semibold">
+                            {{Number::currency($price_range, 'USD')}}
+                        </div>
                           <label for="basic-range-slider-usage" class="sr-only">Example range</label>
-                          <input type="range"
+                          <input wire:model.live="price_range" type="range"
                               class="w-full bg-transparent cursor-pointer appearance-none disabled:opacity-50 disabled:pointer-events-none focus:outline-none
                 [&::-webkit-slider-thumb]:w-2.5
                 [&::-webkit-slider-thumb]:h-2.5
@@ -92,10 +95,10 @@
                 [&::-moz-range-track]:h-2
                 [&::-moz-range-track]:bg-gray-100
                 [&::-moz-range-track]:rounded-full"
-                              id="basic-range-slider-usage" max="20000" value="10" step="5">
+                              id="basic-range-slider-usage" max="20000" value="5" step="1">
                           <div class="flex justify-between ">
-                              <span class="inline-block text-lg font-bold text-blue-400 ">$10</span>
-                              <span class="inline-block text-lg font-bold text-blue-400 ">$ 20000</span>
+                              <span class="inline-block text-lg font-bold text-blue-400 ">{{Number::currency(5, 'USD')}}</span>
+                              <span class="inline-block text-lg font-bold text-blue-400 ">{{Number::currency(20000, 'USD')}}</span>
                           </div>
                       </div>
                   </div>

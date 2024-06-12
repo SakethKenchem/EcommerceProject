@@ -23,6 +23,9 @@ class ProductsPage extends Component
     public $featured;
     #[Url]
     public $on_sale;
+    #[Url]
+    public $price_range = 20000;
+
 
     public function render()
     {
@@ -40,6 +43,9 @@ class ProductsPage extends Component
         }
         if($this->on_sale){
             $productQuery->where('on_sale', '>', 0);
+        }
+        if($this->price_range){
+            $productQuery->where('price', '<=', $this->price_range);
         }
         
         return view('livewire.products-page', [
