@@ -3,12 +3,14 @@
 namespace App\Livewire;
 
 use App\Models\Brand;
-use App\Models\Category;
 use App\Models\Product;
 use Livewire\Component;
+use App\Models\Category;
+use Livewire\Attributes\Url;
 use Livewire\WithPagination;
 use Livewire\Attributes\Title;
-use Livewire\Attributes\Url;
+use App\Helpers\CartManagement;
+use App\Livewire\Partials\Navbar;
 
 #[Title('Products - ECommerce')]
 
@@ -25,7 +27,15 @@ class ProductsPage extends Component
     public $on_sale;
     #[Url]
     public $price_range = 20000;
+    #[Url]
+    public $sort = 'latest';
 
+    //add product to cart method
+    public function addToCart($product_id){
+        $total_count = CartManagement::addItemToCart($product_id);
+        $this->dispatch('update-card-count', total_count: $total_count)-> to(Navbar::class);  
+
+    }
 
     public function render()
     {
@@ -47,6 +57,15 @@ class ProductsPage extends Component
         if($this->price_range){
             $productQuery->where('price', '<=', $this->price_range);
         }
+
+        if($this->sort == 'latest'){
+            $productQuery->latest();
+        }elseif($this->sort == 'price_low_to_high'){
+            $productQuery->orderBy('price', 'asc');
+        }elseif($this->sort == 'price_high_to_low'){
+            $productQuery->orderBy('price', 'desc');
+        }
+        
         
         return view('livewire.products-page', [
             'products' => $productQuery->paginate(6),

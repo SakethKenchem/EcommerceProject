@@ -108,10 +108,11 @@
                       <div
                           class="items-center justify-between hidden px-3 py-2 bg-gray-100 md:flex dark:bg-gray-900 ">
                           <div class="flex items-center justify-between">
-                              <select name="" id=""
+                              <select name="" id="" wire:model.live="sort"
                                   class="block w-40 text-base bg-gray-100 cursor-pointer dark:text-gray-400 dark:bg-gray-900">
-                                  <option value="">Sort by latest</option>
-                                  <option value="">Sort by Price</option>
+                                  <option value="latest">Sort by latest</option>
+                                  <option value="price_low_to_high">Price: low to high</option>
+                                    <option value="price_high_to_low">Price: high to low</option>
                               </select>
                           </div>
                       </div>
@@ -139,7 +140,7 @@
                           </div>
                           <div class="flex justify-center p-4 border-t border-gray-300 dark:border-gray-700">
 
-                              <a href="#"
+                              <a wire:click.prevent = 'addToCart({{$product->id}})' href=""
                                   class="text-gray-500 flex items-center space-x-2 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-300">
                                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                       fill="currentColor" class="w-4 h-4 bi bi-cart3 " viewBox="0 0 16 16">
